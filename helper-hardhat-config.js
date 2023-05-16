@@ -24,5 +24,8 @@ const networkConfig = {
     //     ethUsdPriceFeed: "comimg zoon",
     // },
 };
+const developmentChains = ["hardhat", "localhost"];
+const DECIMALS = "8";
+const INITIAL_PRICE = "180000000000";
 
-module.exports = { networkConfig };
+module.exports = { developmentChains, DECIMALS, INITIAL_PRICE, networkConfig };

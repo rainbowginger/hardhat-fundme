@@ -8,7 +8,7 @@ require("hardhat-deploy");
 /** @type import('hardhat/config').HardhatUserConfig */
 module.exports = {
     solidity: {
-        compilers:[{0.6.0, 0.8.0, ^0.8.0}],
+        compilers: [{ version: "0.6.6" }, { version: "0.8.8" }],
     },
     networks: {
         hardhat: {},
@@ -20,6 +20,11 @@ module.exports = {
         localhost: {
             url: "http://127.0.0.1:8545/",
             chainId: 31337,
+        },
+    },
+    namedAccounts: {
+        deployer: {
+            default: 0,
         },
     },
 };
