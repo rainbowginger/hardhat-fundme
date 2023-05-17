@@ -17,10 +17,12 @@ module.exports = async ({ getNamedAccounts, deployments }) => {
     } else {
         priceFeedAddress = networkConfig[chainId]["ethUsdPriceFeed"];
     }
-    const fundME = await deploy("fundMe", {
+    log("deploying Contracts .........");
+    const fundME = await deploy("FundMe", {
         from: deployer,
         args: [priceFeedAddress],
         log: true,
     });
+    log("--------------------DONE-------------------------------------");
 };
 module.exports.tags = ["all", "funds"];
