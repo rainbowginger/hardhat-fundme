@@ -3,8 +3,9 @@ pragma solidity 0.8.8;
 
 import "@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol";
 import "./PriceConverter.sol";
+import "hardhat/console.sol";
 
-error NotOwner();
+error Fundme_NotOwner();
 
 contract FundMe {
     using PriceConverter for uint256;
@@ -19,6 +20,7 @@ contract FundMe {
     constructor(address priceFeedAddress) {
         i_owner = msg.sender;
         priceFeed=AggregatorV3Interface(priceFeedAddress);
+        console.log("owner",i_owner);
     }
 
     function fund() public payable {
@@ -36,7 +38,7 @@ contract FundMe {
     
     modifier onlyOwner {
         // require(msg.sender == owner);
-        if (msg.sender != i_owner) revert NotOwner();
+        if (msg.sender != i_owner) revert Fundme_NotOwner();
         _;
     }
     
@@ -54,6 +56,13 @@ contract FundMe {
         // call
         (bool callSuccess, ) = payable(msg.sender).call{value: address(this).balance}("");
         require(callSuccess, "Call failed");
+    }
+    function getPricefeed() public view returns(AggregatorV3Interface) {
+        return priceFeed;
+    }
+
+    function getOwner() public view returns(address){
+        return i_owner;
     }
     // Explainer from: https://solidity-by-example.org/fallback/
     // Ether is sent to contract

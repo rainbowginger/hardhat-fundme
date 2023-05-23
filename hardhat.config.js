@@ -16,6 +16,7 @@ module.exports = {
             url: process.env.S_RPC_URL,
             accounts: [process.env.S_P_KEY],
             chainId: 11155111,
+            blockConfirmations: 6,
         },
         localhost: {
             url: "http://127.0.0.1:8545/",
@@ -31,5 +32,12 @@ module.exports = {
         apiKey: {
             sepolia: process.env.ETHERSCAN_API_KEY,
         },
+    },
+    gasReporter: {
+        enabled: false,
+        currency: "USD",
+        outputFile: "gas-report.txt",
+        noColors: true,
+        coinmarketcap: process.env.CMC_KEY,
     },
 };
