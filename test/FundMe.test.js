@@ -38,7 +38,18 @@ describe("FundMe", function () {
         it("signer check", async () => {
             accounts = await ethers.getSigners();
             const owner = await fundMe.getOwner();
+
             assert.equal(await accounts[0].getAddress(), owner);
+        });
+        it("funding changes balance correctly", async () => {
+            // const startingBalance = await fundMe.provider.getbalance();
+            let startingBalance = await fundMe.getBalance();
+            await fundMe.fund({ value: sendValue });
+            let updatedValue = await fundMe.getBalance();
+            assert.equal(
+                updatedValue.toString(),
+                startingBalance.add(sendValue).toString()
+            );
         });
         it("of only owner cud withdraw", async () => {
             // assert.equal(deployer, owner);

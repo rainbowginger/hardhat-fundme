@@ -64,6 +64,9 @@ contract FundMe {
     function getOwner() public view returns(address){
         return i_owner;
     }
+    function getBalance() public view returns (uint){
+       return (address(this).balance);
+    }
     // Explainer from: https://solidity-by-example.org/fallback/
     // Ether is sent to contract
     //      is msg.data empty?
